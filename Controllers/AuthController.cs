@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest login)
     {
-        using var conexao = _db.GetConnection();
+        using var conexao = _db.ObterConexao();
 
         var usuario = conexao.QueryFirstOrDefault(
             "SELECT * FROM usuarios WHERE cpf = @CPF",
@@ -41,7 +41,7 @@ public class AuthController : ControllerBase
     [HttpPost("cadastro")]
 public IActionResult Cadastro([FromBody] UsuarioCadastro user)
 {
-    using var conexao = _db.GetConnection();
+    using var conexao = _db.ObterConexao();
 
     var senhaHash = BCrypt.Net.BCrypt.HashPassword(user.Senha);
 
@@ -68,7 +68,7 @@ public IActionResult Cadastro([FromBody] UsuarioCadastro user)
 [HttpGet("doacoes/{usuarioId}")]
 public IActionResult ListarDoacoes(int usuarioId)
 {
-    using var conexao = _db.GetConnection();
+    using var conexao = _db.ObterConexao();
 
     var sql = "SELECT * FROM doacoes WHERE usuario_id = @Id";
 

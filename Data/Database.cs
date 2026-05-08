@@ -13,9 +13,9 @@ namespace MinhaAPI.Data
             _config = config;
         }
 
-        public IDbConnection GetConnection()
+        public IDbConnection ObterConexao()
         {
-            return new NpgsqlConnection(_config.GetConnectionString("DefaultConnection"));
+            return new NpgsqlConnection(_config.GetConnectionString("ConexaoPadrao"));
         }
     }
 }
